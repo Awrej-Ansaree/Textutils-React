@@ -40,10 +40,7 @@ export default function TextForm(props) {
 
   const copyTxt = () => {
     if (text) {
-      const textBox = document.getElementById("textBox");
-      textBox.select();
-      textBox.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(textBox.value);
+      navigator.clipboard.writeText(text);
       // props.showAlert("Copied the text to the clipboard", "success");
     }
   };
@@ -62,7 +59,7 @@ export default function TextForm(props) {
 
   return (
     <div className="container mt-4">
-      <h1>{props.heading}</h1>
+      <h2 className="mb-3">{props.heading}</h2>
       <div className="mb-3">
         <textarea
           className="form-control mb-3"
@@ -79,7 +76,7 @@ export default function TextForm(props) {
 
         <div className="utilsBtn">
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -89,7 +86,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -99,7 +96,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -109,7 +106,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -119,7 +116,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -129,7 +126,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -139,7 +136,7 @@ export default function TextForm(props) {
           </button>
 
           <button
-            type="button"
+            type="button" disabled={text.length===0}
             className={`btn btn-${
               props.mode === "dark" ? "dark" : "outline-primary"
             } me-2 my-md-0 my-1`}
@@ -153,15 +150,23 @@ export default function TextForm(props) {
       <div className="container mb-3">
         <h3>Your Text Summary</h3>
         <p>
-          Total Words: {text ? text.split(" ").length : 0} | Total Characters:{" "}
-          {text.length} | Reading Time(WPM) :{" "}
-          {text ? 0.008 * text.split(" ").length : 0}
+          Total Words:{" "}
+          {
+            text.split(/\s+/).filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          | Total Characters: {text.length} | Reading Time(WPM) :{" "}
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}
         </p>
       </div>
 
       <div className="container mb-3">
         <h3>Preview</h3>
-        <p>{text ? text : "Enter something to see the preview"}</p>
+        <p>{text ? text : "Nothing to preview!"}</p>
       </div>
     </div>
   );

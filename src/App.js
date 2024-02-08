@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
@@ -26,14 +26,12 @@ function App() {
       setMode("light");
       document.body.style.backgroundColor = "#f8f9fa";
       document.body.style.color = "black";
-      // document.title = "TextUtils - Light Mode"
-      // showAlert("Enabled Light Mode", "success");
+      showAlert("Enabled Light Mode", "success");
     } else {
       setMode("dark");
       document.body.style.backgroundColor = "#495057";
       document.body.style.color = "white";
-      // document.title = "TextUtils - Dark Mode"
-      // showAlert("Enabled Dark Mode", "success");
+      showAlert("Enabled Dark Mode", "success");
     }
   };
 
@@ -50,7 +48,7 @@ function App() {
             path="/"
             element={
               <TextForm
-                heading="Enter the text to analyze"
+                heading="Try Textutils - Word Counter, Character Counter, Remove Extra Spaces"
                 mode={mode}
                 showAlert={showAlert}
               />
